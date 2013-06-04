@@ -21,6 +21,14 @@ void dctext(Mat& input, Mat& output,
   int bestcoeffs_v[18] = {3, 4, 5, 11, 12, 13, 19, 20, 21, 43, 44, 45, 51, 52, 53, 59, 60, 61};
   int bestcoeffs_h[18] = {24, 25, 26, 29, 30, 31, 32, 33, 34, 37, 38, 39, 40, 41, 42, 45, 46, 47};
   const int block_size = 8;
+
+
+  if ((input.cols%block_size != 0)||(input.rows%block_size != 0))
+  {
+	input = input(Rect(0,0,input.cols-input.cols%block_size,input.rows-input.rows%block_size));
+  }
+	
+
   
   int block_rows = input.rows / block_size, block_cols = input.cols / block_size;
   Mat block_energies_v(block_rows, block_cols, DataType<float>::type);
